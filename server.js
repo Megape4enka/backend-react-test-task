@@ -36,21 +36,21 @@ async function start() {
 
         await app.listen(PORT, async () => {
             console.log(`running server on port ${PORT}`);
-            const breeds = await Breeds.find()
-            if (breeds.length) {
-                return
-            }
-
-            for (let i = 0; i < 100; i++) {
-                const response = await axios.get('https://dog.ceo/api/breeds/image/random')
-                const breed = response.data.message.split('/')[4]
-                const title = response.data.message.split('/')[5].split('.')[0]
-                const image = response.data.message
-                const item = new Breeds({title, breed})
-                await item.save()
-                const dogItem = new  Dogs({image, breedId: item._id})
-                await dogItem.save()
-            }
+            // const breeds = await Breeds.find()
+            // if (breeds.length) {
+            //     return
+            // }
+            //
+            // for (let i = 0; i < 100; i++) {
+            //     const response = await axios.get('https://dog.ceo/api/breeds/image/random')
+            //     const breed = response.data.message.split('/')[4]
+            //     const title = response.data.message.split('/')[5].split('.')[0]
+            //     const image = response.data.message
+            //     const item = new Breeds({title, breed})
+            //     await item.save()
+            //     const dogItem = new  Dogs({image, breedId: item._id})
+            //     await dogItem.save()
+            // }
         });
     } catch (e) {
         console.log('running server ERROR :', e)
